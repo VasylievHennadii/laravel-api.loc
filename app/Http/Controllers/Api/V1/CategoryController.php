@@ -14,7 +14,11 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return 'categories list';
+//        return response()->json([
+//            'message' => 'Categories List'
+//        ]);
+
+        return Category::all();
     }
 
     /**
