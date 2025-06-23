@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Api\V1;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -17,8 +18,8 @@ class CategoryResource extends JsonResource
         return [
             'id' => $this->id,
             'title' => $this->title,
-            'created' => $this->created_at,
-            'updated' => $this->updated_at,
+            'created' => Carbon::parse($this->created_at)->format('Y-m-d H:i:s'),
+            'updated' => Carbon::parse($this->updated_at)->format('Y-m-d H:i:s'),
 
         ];
     }
