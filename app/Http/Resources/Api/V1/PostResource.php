@@ -20,7 +20,7 @@ class PostResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'categoryId' => $this->category_id,
-//            'content' => $this->content,
+            'categoryName' => $this->category->title,
             'content' => $this->when(Route::currentRouteNamed() == 'post.show',$this->content),
             'created' => Carbon::parse($this->created_at)->format('Y-m-d H:i:s'),
             'updated' => Carbon::parse($this->updated_at)->format('Y-m-d H:i:s'),
