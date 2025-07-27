@@ -24,14 +24,12 @@ class AuthController extends Controller
             ], 401);
         }
 
-        $user = Auth::user();
+//        $user = Auth::user();
+        $user = User::query()->where('email', $request->email)->first();
+        $user->tokens()->delete();
         return response()->json([
-//            'user' => [
-//                'id' => $user->id,
-//                'name' => $user->name,
-//                'email' => $user->email,
-//            ]
-            'user' => $user
+            'user' => $user,
+            'token' => $user->createToken("Token of user: {$user->name}")->plainTextToken
         ]);
     }
 
