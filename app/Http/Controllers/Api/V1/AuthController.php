@@ -7,6 +7,7 @@ use App\Http\Requests\LoginUserRequest;
 use App\Http\Requests\StoreUserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
@@ -17,7 +18,21 @@ class AuthController extends Controller
 
     public function login(LoginUserRequest $request)
     {
-        return 'Login';
+        if (!Auth::attempt($request->only(['email', 'password']))) {
+            return response()->json([
+                'message' => 'Wrong email or password'
+            ], 401);
+        }
+
+        $user = Auth::user();
+        return response()->json([
+//            'user' => [
+//                'id' => $user->id,
+//                'name' => $user->name,
+//                'email' => $user->email,
+//            ]
+            'user' => $user
+        ]);
     }
 
     public function logout()
